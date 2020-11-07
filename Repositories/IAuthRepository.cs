@@ -1,7 +1,9 @@
+using System.Threading.Tasks;
+
 namespace backend.Repositories
 {
     public interface IAuthRepository
     {
-        void Add(User user)
+        Task<bool> Login(string email, string password);
     }
 }
