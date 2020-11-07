@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using backend.Data;
 using backend.Helpers;
+using backend.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
@@ -67,10 +68,15 @@ namespace backend
                     ValidateAudience = false
                 };
             });
+
+            services.AddScoped<IAuthRepository, AuthRepository>();
+            services.AddScoped<IUsersRepository, UserRepository>();
+            services.AddTransient<IUnityOfWork, UnityOfWork>();
+            services.AddTransient<SeedAdmin>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, SeedAdmin seeder)
         {
             if (env.IsDevelopment())
             {
@@ -100,9 +106,10 @@ namespace backend
             //app.UseHttpsRedirection();
 
             app.UseRouting();
-
-            app.UseAuthorization();
+            seeder.SeedUsers();
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

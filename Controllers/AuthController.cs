@@ -17,7 +17,7 @@ namespace backend.Controllers
         }
 
         [HttpPost("signin")]
-        public async Task<IActionResult> SignUp(Login login)
+        public async Task<IActionResult> SignIn(Login login)
         {
             var user = await authRepository.Login(login);
 
