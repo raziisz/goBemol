@@ -1,5 +1,7 @@
 using System.Threading.Tasks;
 using backend.Data;
+using backend.Models.Dto;
+using Microsoft.EntityFrameworkCore;
 
 namespace backend.Repositories
 {
@@ -11,9 +13,14 @@ namespace backend.Repositories
             this.context = context;
 
         }
-        public Task<bool> Login(string email, string password)
+        public async Task<bool> Login(Login login)
         {
-            throw new System.NotImplementedException();
+            var user = await context.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Email == login.Email);
+
+            if (user == null) return false;
+            if (!VerifyPasswordHash(login.Password, user.PasswordHash, user.PasswordSalt)) return false;
+
+            return true;
         }
 
         private bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)

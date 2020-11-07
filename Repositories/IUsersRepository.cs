@@ -1,9 +1,12 @@
-using backend.Models;
+using System.Threading.Tasks;
+using backend.Models.Dto;
 
 namespace backend.Repositories
 {
     public interface IUsersRepository
     {
-         void Add(User user);
+         Task Add(NewUser newUser);
+
+         Task<bool> VerifyEmail(string email);
     }
 }
