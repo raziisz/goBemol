@@ -1,4 +1,6 @@
 using System.Threading.Tasks;
+using backend.Models.Dto;
+using backend.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace backend.Controllers
@@ -7,14 +9,25 @@ namespace backend.Controllers
     [Route("api/auth")]
     public class AuthController : ControllerBase
     {
-        public AuthController()
+        private readonly IAuthRepository authRepository;
+        public AuthController(IAuthRepository authRepository)
         {
-            
+            this.authRepository = authRepository;
+
         }
 
-        [HttpPost("signup")]
-        public async Task<IActionResult> SignUp(string email, string password) {
-            return null;
+        [HttpPost("signin")]
+        public async Task<IActionResult> SignUp(Login login)
+        {
+            var user = await authRepository.Login(login);
+
+            if (user == null) return BadRequest(new { message = "Usuário ou senha inválida."});
+
+            return Ok(new { 
+                Nome = user.Nome,
+                Sobrenome = user.Sobrenome,
+                Email = user.Email
+             });
         }
     }
 }
