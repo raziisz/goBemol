@@ -21,7 +21,7 @@ namespace backend.Controllers
             
         }
 
-    [HttpPost]
+    [HttpPost("signup")]
     public async Task<IActionResult> SignUp(NewUser newUser)
     {
 
@@ -32,7 +32,7 @@ namespace backend.Controllers
         await usersRepository.Add(newUser);
 
         if (await uof.Commit()) {
-            return Ok(new { message = $"Seja Bem-Vindo {newUser.Nome}."});
+            return Ok(new { message = $"Conta criada com sucesso, comece logando."});
         }
 
         return StatusCode(500, new { message = "Ocorreu um erro no servidor"});

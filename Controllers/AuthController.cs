@@ -1,7 +1,9 @@
 using System.Threading.Tasks;
 using backend.Models.Dto;
 using backend.Repositories;
+using backend.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 
 namespace backend.Controllers
 {
@@ -10,8 +12,10 @@ namespace backend.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IAuthRepository authRepository;
-        public AuthController(IAuthRepository authRepository)
+        private readonly IConfiguration config;
+        public AuthController(IAuthRepository authRepository, IConfiguration config)
         {
+            this.config = config;
             this.authRepository = authRepository;
 
         }
@@ -21,13 +25,19 @@ namespace backend.Controllers
         {
             var user = await authRepository.Login(login);
 
-            if (user == null) return BadRequest(new { message = "Usuário ou senha inválida."});
+            if (user == null) return BadRequest(new { message = "Usuário ou senha inválida." });
 
-            return Ok(new { 
-                Nome = user.Nome,
-                Sobrenome = user.Sobrenome,
-                Email = user.Email
-             });
+            var token = TokenService.GenerateTokenUser(user, config);
+            
+            return Ok(new
+            {
+                user = new {
+                    Nome = user.Nome,
+                    Sobrenome = user.Sobrenome,
+                    Email = user.Email
+                },
+                token
+            });
         }
     }
 }

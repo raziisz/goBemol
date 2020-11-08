@@ -42,3 +42,11 @@ C:\Users\raziel\Documents\trabs\goBemol\backend\obj\Debug\netcoreapp3.1\staticwe
 C:\Users\raziel\Documents\trabs\goBemol\backend\obj\Debug\netcoreapp3.1\staticwebassets\backend.StaticWebAssets.xml
 C:\Users\raziel\Documents\trabs\goBemol\backend\obj\Debug\netcoreapp3.1\backend.dll
 C:\Users\raziel\Documents\trabs\goBemol\backend\obj\Debug\netcoreapp3.1\backend.pdb
+C:\Users\raziel\Documents\trabs\goBemol\backend\bin\Debug\netcoreapp3.1\Data\UserAdminData.json
+C:\Users\raziel\Documents\trabs\goBemol\backend\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\raziel\Documents\trabs\goBemol\backend\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\raziel\Documents\trabs\goBemol\backend\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Logging.dll
+C:\Users\raziel\Documents\trabs\goBemol\backend\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.dll
+C:\Users\raziel\Documents\trabs\goBemol\backend\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\raziel\Documents\trabs\goBemol\backend\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Tokens.dll
+C:\Users\raziel\Documents\trabs\goBemol\backend\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll
