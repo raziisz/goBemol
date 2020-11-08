@@ -42,7 +42,7 @@ namespace backend.Repositories
         {
             var user = await context.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Email == email);
 
-            return !(user == null);
+            return user != null;
         }
 
         private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)

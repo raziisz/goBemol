@@ -27,7 +27,7 @@ namespace backend.Controllers
 
         var emailUsed = await usersRepository.VerifyEmail(newUser.Email);
 
-        if (emailUsed) BadRequest(new { message = "Este e-mail já está em uso." });
+        if (emailUsed) return BadRequest(new { message = "Este e-mail já está em uso." });
 
         await usersRepository.Add(newUser);
 
